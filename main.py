@@ -108,16 +108,6 @@ def calculate_segment_lengths(markers_one_position):
     print("Segment Lengths: ", seg_len)
     return seg_len
 
-def calculate_segment_lengths2(markers_2D):
-    num_times = len(markers_2D[0])
-    num_segments = len(markers_2D) - 1
-    seg_lens_list = np.zeros((num_segments, num_times))
-    for t in range(num_times):
-        positions_at_t = [marker[t] for marker in markers_2D]
-        for i in range(num_segments):
-            seg_lens_list[i, t] = np.linalg.norm(positions_at_t[i + 1] - positions_at_t[i])
-    return seg_lens_list
-
 def convert_segments_to_angles(markers):
     marker_0 = np.copy(markers[0])
     marker_0[0] -= 100
