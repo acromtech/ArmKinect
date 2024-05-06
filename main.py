@@ -187,11 +187,11 @@ def inverse_kinematics(init_angles, target, seg_lens, ts_num):
 def optimal_jerk(seg_lens, alphas, ts_num):
     tau = np.linspace(0, 1, ts_num)
     beta = np.zeros((3, ts_num))
-    beta0 = alphas[:, 0] # defined as an input
-    betaT = alphas[:,-1] # calculated from inverse kinematics
-    beta0 = beta0.reshape((3, 1))  # Reshape to match dimensions with tau
-    betaT = betaT.reshape((3, 1))  # Reshape to match dimensions with tau
-    beta = beta0 + (beta0 - betaT) * (15 * tau**4 - 6 * tau**5 - 10 * tau**3)  # using vector, ergo dont have to calculate separately
+    beta0 = alphas[:, 0]
+    betaT = alphas[:,-1]
+    beta0 = beta0.reshape((3, 1))
+    betaT = betaT.reshape((3, 1))
+    beta = beta0 + (beta0 - betaT) * (15 * tau**4 - 6 * tau**5 - 10 * tau**3)
     b1 = beta[0, :]
     b12 = b1 + beta[1, :]
     b123 = b12 + beta[2, :]
@@ -218,9 +218,8 @@ def plot_marker_data_3D(markers, time_ms, step):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    num_images = markers[0].shape[0]  # Nombre d'images
+    num_images = markers[0].shape[0]
 
-    # Calcul des limites des axes
     min_x = np.min([marker[:, 0] for marker in markers])
     max_x = np.max([marker[:, 0] for marker in markers])
     min_y = np.min([marker[:, 1] for marker in markers])
@@ -236,13 +235,13 @@ def plot_marker_data_3D(markers, time_ms, step):
         mean_markers = [np.mean(marker[indices], axis=0) for marker in markers]
 
         for j, mean_marker in enumerate(mean_markers):
-            marker_color = ['r', 'g', 'b', 'm'][j]  # Couleur du marqueur
-            ax.plot(mean_marker[0], mean_marker[1], mean_marker[2], marker_color + 'o')  # Tracé du marqueur
+            marker_color = ['r', 'g', 'b', 'm'][j]
+            ax.plot(mean_marker[0], mean_marker[1], mean_marker[2], marker_color + 'o')
 
             if j < len(mean_markers) - 1:
                 next_mean_marker = mean_markers[j + 1]
                 ax.plot([mean_marker[0], next_mean_marker[0]], [mean_marker[1], next_mean_marker[1]],
-                        [mean_marker[2], next_mean_marker[2]], marker_color, linewidth=2)  # Tracé du segment
+                        [mean_marker[2], next_mean_marker[2]], marker_color, linewidth=2)
 
         ax.set_xlabel('X Position (mm)')
         ax.set_ylabel('Y Position (mm)')
@@ -250,7 +249,7 @@ def plot_marker_data_3D(markers, time_ms, step):
         ax.set_xlim(min_x, max_x)
         ax.set_ylim(min_y, max_y)
         ax.set_zlim(min_z, max_z)
-        ax.set_title('Reconstruction du bras de t={} ms à t={} ms (Moyenne sur chaque intervalle de {} valeurs)'
+        ax.set_title('Arm t={} ms à t={} ms (Average of {} values)'
                      .format(time_ms[indices[0]], time_ms[indices[-1]], step))
 
         plt.pause(0.1)
@@ -258,13 +257,8 @@ def plot_marker_data_3D(markers, time_ms, step):
     plt.close()
 
 def plot_movement_2D(markers, E, E_smooth_jerk, ts_num):
-    # marker_4_start : real start position of the end effector
-    # marker_4_end : real end position of the end effector
-    # marker_1_start : real base position to set (offset)
-
     markers_start, markers_end = get_end_effector_start_end_position(markers)
     averaged_markers = average_data(markers, ts_num)
-    
     plt.figure()
 
     # Plot the data start/end position
