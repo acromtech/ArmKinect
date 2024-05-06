@@ -91,10 +91,6 @@ To use the code:
 
 14. **plot_movement_2D(markers, E, E_smooth_jerk, ts_num)**: This function plots the 2D arm movement trajectory based on the predicted and smoothed jerk-optimized motion. It also plot the real arm trajectory directly extract from data for comparison.
 
-#### Limitations
-
-The main limitations of the code include its focus on 2D movement reconstruction, sensitivity to sensor placement, complexity of the human arm model and captured data.
-
 #### Future Work
 
 To address the limitations, future work could involve:
