@@ -49,13 +49,17 @@ To use the code:
 
 ### Report
 
-#### Overview
+#### Questions
 
-This report summarizes the functionality and limitations of the provided code for recreating human arm movement and implementing inverse kinematics.
+1. **Filtering EMG Data**: The code implements two accurate filtering techniques for EMG data: low-pass and high-pass filtering. It compares the filtered data visually through plotting, allowing for an assessment of their effectiveness in noise reduction.
 
-#### Functionality
+2. **Conversion of Marker Coordinates to Angles**: Through the function `convert_segments_to_angles`, the code converts marker coordinates to angles based on the motion trajectory. It calculates the angles between consecutive markers and plots the angle values to visualize the arm movement.
 
-The code effectively imports motion capture and EMG data, applies filters for data accuracy, and reconstructs arm movement trajectories in 2D space. It calculates segment lengths, computes joint angles using inverse kinematics, and applies optimal jerk smoothing for smoother movement. Various plotting functions visualize the data and computed results, aiding in analysis and interpretation.
+3. **Iterative Prediction of Motion**: The code performs an iterative prediction of motion using inverse kinematics with the real start and end positions of the arm. It calculates joint angles iteratively and plots the predicted arm movement trajectory, allowing for a comparison with the actual motion.
+
+4. **Jerk-Optimized Prediction of Motion**: Utilizing the `optimal_jerk` function, the code applies jerk optimization to predict arm motion with the real start and end positions. It smooths the trajectory for smoother movement and plots the optimized predicted motion alongside the actual motion for comparison.
+
+5. **Comparison between Real and Predicted Motions**: The code facilitates a comparison between the real and predicted motions by plotting them together. This comparison allows for an evaluation of the accuracy and effectiveness of the prediction methods in reproducing the actual arm movement.
 
 #### Limitations
 
