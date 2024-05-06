@@ -89,7 +89,7 @@ To use the code:
 
 13. **plot_marker_data_3D(markers, time_ms, step)**: This function plots the marker data in 3D space over time, allowing for visualization of the arm movement trajectory.
 
-14. **plot_movement_2D(markers, E, E_smooth_jerk, ts_num)**: This function plots the 2D arm movement trajectory based on the predicted and smoothed jerk-optimized motion. It also includes the real start and end positions for comparison.
+14. **plot_movement_2D(markers, E, E_smooth_jerk, ts_num)**: This function plots the 2D arm movement trajectory based on the predicted and smoothed jerk-optimized motion. It also plot the real arm trajectory directly extract from data for comparison.
 
 #### Limitations
 
